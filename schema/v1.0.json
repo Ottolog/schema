@@ -1,0 +1,132 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://ottolog.io/schema/v1.0",
+	"title": "Ottolog Certificate Schema",
+	"type": "object",
+	"required": [
+		"certificate_id",
+		"version",
+		"issued_at",
+		"issuer",
+		"vehicle",
+		"checkups",
+		"signatures"
+	],
+	"properties": {
+		"certificate_id": { "type": "string", "format": "uuid" },
+		"version": { "type": "string" },
+		"issued_at": { "type": "string", "format": "date-time" },
+		"issuer": {
+			"type": "object",
+			"required": ["garage_id", "name", "location"],
+			"properties": {
+				"garage_id": { "type": "string" },
+				"name": { "type": "string" },
+				"location": {
+					"type": "object",
+					"required": ["address"],
+					"properties": {
+						"address": { "type": "string" },
+						"geo": {
+							"type": "object",
+							"properties": {
+								"lat": { "type": "number" },
+								"lon": { "type": "number" }
+							},
+							"additionalProperties": false
+						}
+					},
+					"additionalProperties": false
+				}
+			},
+			"additionalProperties": false
+		},
+		"vehicle": {
+			"type": "object",
+			"required": ["vin", "license_plate", "make", "model"],
+			"properties": {
+				"vin": { "type": "string" },
+				"license_plate": { "type": "string" },
+				"make": { "type": "string" },
+				"model": { "type": "string" },
+				"year": { "type": "integer" }
+			},
+			"additionalProperties": false
+		},
+		"owner_hash": { "type": "string" },
+		"checkups": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": ["type", "status"],
+				"properties": {
+					"type": { "type": "string" },
+					"status": {
+						"type": "string",
+						"enum": ["passed", "failed", "advisory"]
+					},
+					"valid_until": { "type": "string", "format": "date-time" },
+					"summary": { "type": "string" },
+					"notes": { "type": "string" },
+					"components": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"required": ["name", "status"],
+							"properties": {
+								"name": { "type": "string" },
+								"status": {
+									"type": "string",
+									"enum": ["ok", "warning", "fail"]
+								},
+								"comments": { "type": "string" }
+							},
+							"additionalProperties": false
+						}
+					},
+					"attachments": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"required": ["type"],
+							"properties": {
+								"type": { "type": "string" },
+								"url": { "type": "string", "format": "uri" },
+								"data": { "type": "object" }
+							},
+							"additionalProperties": false
+						}
+					}
+				},
+				"additionalProperties": false
+			}
+		},
+		"signatures": {
+			"type": "object",
+			"required": ["garage_signature", "ottolog_signature"],
+			"properties": {
+				"garage_signature": { "type": "string" },
+				"ottolog_signature": { "type": "string" }
+			},
+			"additionalProperties": false
+		},
+		"audit_log": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": ["event", "timestamp"],
+				"properties": {
+					"event": { "type": "string" },
+					"by": { "type": "string" },
+					"timestamp": { "type": "string", "format": "date-time" }
+				},
+				"additionalProperties": false
+			}
+		},
+		"extensions": {
+			"type": "object",
+			"additionalProperties": true
+		}
+	},
+	"additionalProperties": false
+}

@@ -1,0 +1,55 @@
+{
+	"certificate_id": "9fa1bd56-2c4e-4b0c-9a17-efc7815b2e42",
+	"version": "1.0",
+	"issued_at": "2025-06-28T12:00:00Z",
+	"issuer": {
+		"garage_id": "garage-001",
+		"name": "Premier Auto Center",
+		"location": {
+			"address": "42 Mechanic St, Autocity",
+			"geo": { "lat": 45.764, "lon": 4.8357 }
+		}
+	},
+	"vehicle": {
+		"vin": "1HGCM82633A004352",
+		"license_plate": "XYZ-789",
+		"make": "Toyota",
+		"model": "Corolla",
+		"year": 2018
+	},
+	"owner_hash": "sha256:abc123xyz...",
+	"checkups": [
+		{
+			"type": "annual",
+			"status": "passed",
+			"valid_until": "2026-06-28T00:00:00Z",
+			"summary": "Routine inspection passed.",
+			"notes": "Brake pads 60% worn.",
+			"components": [
+				{
+					"name": "Brakes",
+					"status": "warning",
+					"comments": "60% worn"
+				},
+				{ "name": "Lights", "status": "ok" }
+			],
+			"attachments": [
+				{
+					"type": "photo",
+					"url": "https://example.com/images/brakes.jpg"
+				}
+			]
+		}
+	],
+	"signatures": {
+		"garage_signature": "base64-garage-signature",
+		"ottolog_signature": "base64-ottolog-signature"
+	},
+	"audit_log": [
+		{
+			"event": "issued",
+			"by": "garage-001",
+			"timestamp": "2025-06-28T12:00:00Z"
+		}
+	]
+}

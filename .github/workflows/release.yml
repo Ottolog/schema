@@ -1,0 +1,21 @@
+name: Release Schema
+
+on:
+    tags:
+        - 'v*.*.*'
+
+jobs:
+    release:
+        runs-on: [ubuntu-latest]
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  tag_name: ${{ github.ref_name }} # This is the tag name, e.g., v1.0.0
+                  name: Ottolog Schema ${{ github.ref_name }}
+                  body_path: CHANGELOG.md
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
