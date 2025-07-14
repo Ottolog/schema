@@ -4,23 +4,23 @@
 	"title": "Ottolog Certificate Schema",
 	"type": "object",
 	"required": [
-		"certificate_id",
+		"certificateId",
 		"version",
-		"issued_at",
+		"issuedAt",
 		"issuer",
 		"vehicle",
 		"checkups",
 		"signatures"
 	],
 	"properties": {
-		"certificate_id": { "type": "string", "format": "uuid" },
+		"certificateId": { "type": "string", "format": "uuid" },
 		"version": { "type": "string" },
-		"issued_at": { "type": "string", "format": "date-time" },
+		"issuedAt": { "type": "string", "format": "date-time" },
 		"issuer": {
 			"type": "object",
-			"required": ["garage_id", "name", "location"],
+			"required": ["garageId", "name", "location"],
 			"properties": {
-				"garage_id": { "type": "string" },
+				"garageId": { "type": "string" },
 				"name": { "type": "string" },
 				"location": {
 					"type": "object",
@@ -43,17 +43,17 @@
 		},
 		"vehicle": {
 			"type": "object",
-			"required": ["vin", "license_plate", "make", "model"],
+			"required": ["vin", "licensePlate", "make", "model"],
 			"properties": {
 				"vin": { "type": "string" },
-				"license_plate": { "type": "string" },
+				"licensePlate": { "type": "string" },
 				"make": { "type": "string" },
 				"model": { "type": "string" },
 				"year": { "type": "integer" }
 			},
 			"additionalProperties": false
 		},
-		"owner_hash": { "type": "string" },
+		"ownerHash": { "type": "string" },
 		"checkups": {
 			"type": "array",
 			"items": {
@@ -65,7 +65,7 @@
 						"type": "string",
 						"enum": ["passed", "failed", "advisory"]
 					},
-					"valid_until": { "type": "string", "format": "date-time" },
+					"validUntil": { "type": "string", "format": "date-time" },
 					"summary": { "type": "string" },
 					"notes": { "type": "string" },
 					"components": {
@@ -103,14 +103,14 @@
 		},
 		"signatures": {
 			"type": "object",
-			"required": ["garage_signature", "ottolog_signature"],
+			"required": ["garageSignature", "ottologSignature"],
 			"properties": {
-				"garage_signature": { "type": "string" },
-				"ottolog_signature": { "type": "string" }
+				"garageSignature": { "type": "string" },
+				"ottologSignature": { "type": "string" }
 			},
 			"additionalProperties": false
 		},
-		"audit_log": {
+		"auditLog": {
 			"type": "array",
 			"items": {
 				"type": "object",
